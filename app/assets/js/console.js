@@ -15,7 +15,6 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 		}
 	});
 
-	// When someone presses enter, evaluate code and display result.
 	$input.keydown(function (e) {
 		if (e.keyCode === keymap.ENTER) {
 			var $this = $(this),
