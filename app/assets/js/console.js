@@ -2,13 +2,18 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 	'use strict';
 
 	var $console = $('.console'),
+		$input = $('.regex-input'),
 		eventObject = {};
 
 	var previousCommands = localStorage.getItem('previousCommands');
 	previousCommands = previousCommands ? JSON.parse(previousCommands) : [];
 
+	$console.click(function () {
+		$input.focus();
+	});
+
 	// When someone presses enter, evaluate code and display result.
-	$('#regexInput').on('keydown', function (e) {
+	$input.on('keydown', function (e) {
 		if (e.keyCode !== keymap.ENTER) {
 			return;
 		}
