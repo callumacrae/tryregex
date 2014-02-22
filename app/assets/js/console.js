@@ -4,6 +4,9 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 	var $console = $('.console'),
 		eventObject = {};
 
+	var previousCommands = localStorage.getItem('previousCommands');
+	previousCommands = previousCommands ? JSON.parse(previousCommands) : [];
+
 	// When someone presses enter, evaluate code and display result.
 	$('#regexInput').on('keydown', function (e) {
 		if (e.keyCode !== keymap.ENTER) {
@@ -12,6 +15,10 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 
 		var $this = $(this),
 			code = $this.val();
+
+		if (code.length === 0) {
+			return;
+		}
 
 		if (code.slice(0, 6) === 'reset(') {
 			window.reset();
@@ -25,6 +32,10 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 		} else {
 			$(eventObject).trigger('data', [code, result]);
 			result = JSON.stringify(result);
+
+			previousCommands.push(code);
+			var previousCommandsString = JSON.stringify(previousCommands);
+			localStorage.setItem('previousCommands', previousCommandsString);
 		}
 
 		$('.prompt-completed').clone()
