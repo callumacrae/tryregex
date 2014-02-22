@@ -1,0 +1,13 @@
+{
+  "name": "tryregex",
+  "authors": [
+    "Callum Macrae <callum@macr.ae>"
+  ],
+  "dependencies": {
+    "reset-css": "latest",
+    "jquery": "1.10.2"
+  },
+  "devDependencies": {
+    "requirejs": "~2.1.9"
+  }
+}

@@ -1,0 +1,9 @@
+# Repositories
+node_modules
+app/assets/js/bower
+
+# Project files
+app/assets/build
+
+# Generated files
+npm-debug.log
