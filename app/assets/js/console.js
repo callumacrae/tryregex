@@ -1,4 +1,4 @@
-define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
+define(['jquery', 'evaluate', 'keymap', 'objToString'], function ($, evaluate, keymap, objToString) {
 	'use strict';
 
 	var $console = $('.console'),
@@ -45,7 +45,7 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 				result = '<strong class="error">' + result + '</strong>';
 			} else {
 				$(eventObject).trigger('data', [code, result]);
-				result = JSON.stringify(result);
+				result = objToString(result);
 
 				pushToPreviousCmds(code);
 			}
