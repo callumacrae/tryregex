@@ -45,17 +45,17 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 		lesson5: function (input, output) {
 			var expected = window.bio.replace(data.firstName, '[redacted]');
-			return input.indexOf('replace') !== -1 && output === expected;
+			return contains(input, 'replace') && output === expected;
 		},
 
 		lesson6: function (input, output) {
-			if (input.indexOf('num') === -1) {
+			if (!contains(input, 'num')) {
 				return false;
 			}
 
-			if (input.indexOf('exec') !== -1 || input.indexOf('match') !== -1) {
+			if (contains(input, 'exec') || contains(input, 'match')) {
 				return output === null;
-			} else if (input.indexOf('test') !== -1) {
+			} else if (contains(input, 'test')) {
 				return output === false;
 			}
 
@@ -63,11 +63,16 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 		},
 
 		lesson7: function (input, output) {
-			return input.indexOf('3.5') !== -1 && output === true;
+			if (!contains(input, '3.5')) {
+				return false;
+			}
+
+			return (output === true ||
+				($.isArray(output) && output[0] === '345'));
 		},
 
 		lesson8: function (input) {
-			if (input.indexOf('?') === -1) {
+			if (!contains(input, '?')) {
 				return false;
 			}
 
@@ -78,7 +83,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 	function startLesson(num) {
 		$('.lesson' + num).show()
-			.find('p, h1').each(function () {
+			.find('p, h1, pre').each(function () {
 				var $this = $(this),
 					html = $this.html();
 
@@ -89,5 +94,9 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 				$this.html(html);
 			});
+	}
+
+	function contains(string, substr) {
+		return string.indexOf(substr) !== -1;
 	}
 });

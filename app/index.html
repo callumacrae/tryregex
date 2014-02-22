@@ -44,7 +44,7 @@
 				<pre><code>/your expression/</code></pre>
 
 				<p>If you type that into the console, you'll see that the regular expressions is returned.</p>
-				<p>The second is that you can use the <code>.match()</code> method to test an expression on a string. There are a couple other methods you can call: you can use the <code>.exec()</code> method directly on the regex to execute a string on a regex. Type <code>/Callum/.exec(bio)</code>.</p>
+				<p>The second is that you can use the <code>.match()</code> method to test an expression on a string. There are a couple other methods you can call: you can use the <code>.exec()</code> method directly on the regex to execute a string on a regex. Type <code>/{{ firstName }}/.exec(bio)</code>.</p>
 			</div>
 
 			<div class="lesson lesson4">
@@ -56,8 +56,8 @@
 
 			<div class="lesson lesson5">
 				<h2>String replacements</h2>
-				<p>The final method we'll be using is the <code>.replace()</code> method of a string to replace a bit of a string with another string. Type the following to hide your name from the <code>bio</code> var.</p>
-				<pre><code>bio.replace(/Callum/, '[redacted]')</code></pre>
+				<p>The final method we'll be using is the <code>.replace()</code> method of a string to replace a bit of a string with another string. Type the following to hide your name from the <code>bio</code> var:</p>
+				<pre><code>bio.replace(/{{ firstName }}/, '[redacted]')</code></pre>
 			</div>
 
 			<div class="lesson lesson6">
