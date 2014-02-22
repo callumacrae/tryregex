@@ -24,12 +24,14 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 				return;
 			}
 
+			// @todo: Remove hack
 			if (code.slice(0, 6) === 'reset(') {
 				pushToPreviousCmds(code);
 				window.reset();
 				return;
 			}
 
+			// @todo: Remove hack
 			if (code.slice(0, 6) === 'clear(') {
 				pushToPreviousCmds(code);
 				window.clear();
