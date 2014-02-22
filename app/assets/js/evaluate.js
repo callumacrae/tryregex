@@ -1,4 +1,4 @@
-define('evaluate', function () {
+define(function () {
 	'use strict';
 
 	var codeSoFar = '';
@@ -17,7 +17,7 @@ define('evaluate', function () {
 
 			codeSoFar = newCode;
 
-			return JSON.stringify(result);
+			return result;
 		} catch (e) {
 			return e;
 		}
