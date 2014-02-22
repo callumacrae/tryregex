@@ -3,3 +3,109 @@
  *
  * Copyright (c) 2014 Callum Macrae
  */
+
+@bgGray: #efefef;
+@promptColor: blue;
+
+// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+
+	font-family: "Open Sans", sans-serif;
+}
+
+header {
+	padding: 30px;
+	margin-bottom: 30px;
+
+	background-color: @bgGray;
+	text-align: center;
+
+	h1 {
+		text-transform: uppercase;
+		font-size: 48pt;
+		font-weight: bold;
+	}
+}
+
+.main {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: row;
+	width: calc(~"100% - 40px");
+	margin: 0 auto;
+
+	& > div {
+		flex: 1;
+	}
+
+	@media all and (max-width: 640px) {
+		flex-direction: column;
+	}
+
+	.console {
+		font-family: monospace;
+
+		code {
+			white-space: pre;
+		}
+
+		.prompt {
+			color: @promptColor;
+		}
+
+		input {
+			font-size: 13px;
+			font-family: monospace;
+			border: 0;
+			outline: none;
+
+			margin-left: 0px;
+		}
+
+		li:nth-child(even) {
+			margin: 5px 15px;
+		}
+
+		.error {
+			font-weight: bold;
+			color: red;
+		}
+	}
+
+	.tutorial {
+		h2 {
+			font-size: 18pt;
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+
+		p {
+			line-height: 1.2;
+			margin-bottom: 10px;
+		}
+	}
+}
+
+footer {
+	padding: 30px;
+	margin-top: 30px;
+
+	background-color: @bgGray;
+	text-align: center;
+}
+
+.hidden-storage {
+	display: none;
+}

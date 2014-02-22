@@ -7,12 +7,7 @@ var browserSync = require('browser-sync'),
 	plugins = require('gulp-load-plugins')();
 
 var config = {
-	lintOnLess: true,
-	minify: true, // @todo: Get this from a env var or something
-
-	recessOptions: {
-		strictPropertyOrder: false
-	}
+	minify: false
 };
 
 gulp.task('build', ['less']);
@@ -28,10 +23,6 @@ gulp.task('less', function () {
 
 	var stream = gulp.src('app/assets/less/style.less');
 
-	if (config.lintOnLess) {
-		stream = stream.pipe(plugins.recess(config.recessOptions));
-	}
-
 	stream = stream.pipe(lessStream)
 		.pipe(plugins.autoprefixer());
 
@@ -40,13 +31,6 @@ gulp.task('less', function () {
 	}
 
 	stream.pipe(gulp.dest('app/assets/build'));
-});
-
-gulp.task('lesslint', function () {
-	gulp.src(['app/assets/css/*.css', 'app/assets/less/*.less'])
-		.pipe(plugins.recess(config.recessOptions));
-
-	// @todo: Add failure
 });
 
 gulp.task('browser-sync', function () {
@@ -111,7 +95,7 @@ gulp.task('htmllint', function (done) {
 		});
 });
 
-gulp.task('lint', ['jshint', 'lesslint', 'htmllint']);
+gulp.task('lint', ['jshint', /*'lesslint',*/ 'htmllint']);
 
 gulp.task('default', ['lint', 'build', 'browser-sync'], function () {
 	gulp.watch('app/assets/less/**/*.less', ['less']);

@@ -5,8 +5,45 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="assets/js/bower/reset-css/reset.css">
 	<link rel="stylesheet" href="assets/build/style.css">
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,700">
 </head>
 <body>
+	<header>
+		<h1>Try Regex</h1>
+	</header>
+
+	<div class="main">
+		<div class="console">
+			<ul>
+				<li class="inputLine"><label>
+					<span class="prompt">&gt; </span>
+					<input id="regexInput" />
+				</label></li>
+			</ul>
+		</div>
+
+		<div class="tutorial">
+			<h2>Getting started with regex</h2>
+			<p>This interactive tutorial serves as an introduction to regular expressions, specifically regular expressions in JavaScript (which are quite different to regular expressions in other languages).</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad consequuntur corporis distinctio, dolorem, ea error eveniet, facilis iure odio omnis optio perspiciatis placeat provident quaerat quisquam soluta suscipit temporibus voluptas.</p>
+		</div>
+	</div>
+
+	<footer>
+		Site by <a href="http://macr.ae/">Callum Macrae</a>. <small>Copyright &copy; 2014</small>
+	</footer>
+
+	<!-- This div is always hidden; it's for cloning from -->
+	<div class="hidden-storage">
+		<ul>
+			<li class="prompt-completed">
+				<span class="prompt">&gt; </span>
+				<code></code>
+			</li>
+			<li class="prompt-result"><code></code></li>
+		</ul>
+	</div>
 
 	<script data-main="assets/js/app" src="assets/js/bower/requirejs/require.js"></script>
 </body>
