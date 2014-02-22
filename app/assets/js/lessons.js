@@ -72,4 +72,10 @@ define(['jquery', 'console'], function ($, regexConsole) {
 
 		return 'Resetting…';
 	};
+
+	window.clear = function () {
+		setTimeout(function () {
+			$('.console li:not(.input-container)').remove();
+		}, 10);
+	};
 });

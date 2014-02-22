@@ -29,6 +29,13 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 				return;
 			}
 
+			if (code.slice(0, 6) === 'clear(') {
+				pushToPreviousCmds(code);
+				window.clear();
+				$this.val('');
+				return;
+			}
+
 			var result = evaluate(code);
 
 			if (result instanceof Error) {
@@ -76,6 +83,8 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 			reverseCmdIndex--;
 
 			$input.val(previousCmds[previousCmds.length - reverseCmdIndex]);
+		} else if (e.keyCode === keymap.L && e.ctrlKey) {
+			window.clear();
 		}
 	}).on('input', function () {
 		reverseCmdIndex = 0;
