@@ -9,8 +9,10 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 	var previousCmds = localStorage.getItem('previousCommands');
 	previousCmds = previousCmds ? JSON.parse(previousCmds) : [];
 
-	$console.click(function () {
-		$input.focus();
+	$console.click(function (e) {
+		if (['LI', 'CODE'].indexOf(e.target.tagName) === -1) {
+			$input.focus();
+		}
 	});
 
 	// When someone presses enter, evaluate code and display result.
