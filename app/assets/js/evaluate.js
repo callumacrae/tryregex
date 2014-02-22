@@ -8,7 +8,7 @@ define(function () {
 	 *
 	 * @todo: Make eval call more safe
 	 */
-	return function (code) {
+	var evaluate = function (code) {
 		var newCode = codeSoFar + '\n;' + code;
 
 		// If code works, add it to codeSoFar so that variables are preserved
@@ -23,4 +23,10 @@ define(function () {
 			return e;
 		}
 	};
+
+	evaluate.init = function () {
+		eval(codeSoFar); // jshint ignore: line
+	};
+
+	return evaluate;
 });
