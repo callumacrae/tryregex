@@ -15,14 +15,14 @@ requirejs.config({
 	}
 });
 
-require(['jquery', 'evaluate'], function ($, evaluate) {
+require(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 	'use strict';
 
 	/**
 	 * When someone presses enter, evaluate code and display result.
 	 */
 	$('#regexInput').on('keydown', function (e) {
-		if (e.keyCode !== 13) {
+		if (e.keyCode !== keymap.ENTER) {
 			return;
 		}
 
