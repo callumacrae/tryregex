@@ -34,5 +34,13 @@ define(function () {
 		}, 10);
 	};
 
+	window.num = '123456';
+
+	window.answer = function (expression) {
+		data.lastAnswer = expression;
+
+		return 'Answer received';
+	};
+
 	return data;
 });

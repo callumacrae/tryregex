@@ -33,6 +33,46 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 		lesson2: function (input, output) {
 			return ($.isArray(output) && output[0] === data.firstName);
+		},
+
+		lesson3: function (input, output) {
+			return ($.isArray(output) && output[0] === data.firstName);
+		},
+
+		lesson4: function (input, output) {
+			return (typeof output === 'boolean');
+		},
+
+		lesson5: function (input, output) {
+			var expected = window.bio.replace(data.firstName, '[redacted]');
+			return input.indexOf('replace') !== -1 && output === expected;
+		},
+
+		lesson6: function (input, output) {
+			if (input.indexOf('num') === -1) {
+				return false;
+			}
+
+			if (input.indexOf('exec') !== -1 || input.indexOf('match') !== -1) {
+				return output === null;
+			} else if (input.indexOf('test') !== -1) {
+				return output === false;
+			}
+
+			return false;
+		},
+
+		lesson7: function (input, output) {
+			return input.indexOf('3.5') !== -1 && output === true;
+		},
+
+		lesson8: function (input) {
+			if (input.indexOf('?') === -1) {
+				return false;
+			}
+
+			var expr = data.lastAnswer;
+			return (expr.test('frontend') && expr.test('front-end'));
 		}
 	};
 
