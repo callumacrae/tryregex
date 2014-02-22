@@ -1,7 +1,7 @@
 define(function () {
 	'use strict';
 
-	var codeSoFar = '';
+	var codeSoFar = localStorage.getItem('codeSoFar') || '';
 
 	/**
 	 * Evaluates all code so far
@@ -16,6 +16,7 @@ define(function () {
 			var result = eval(newCode); // jshint ignore: line
 
 			codeSoFar = newCode;
+			localStorage.setItem('codeSoFar', codeSoFar);
 
 			return result;
 		} catch (e) {

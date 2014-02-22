@@ -1,8 +1,14 @@
 define(['jquery', 'console'], function ($, regexConsole) {
 	'use strict';
 
-	var currentLesson = 1,
+	var currentLesson = localStorage.getItem('currentLesson') || 1,
 		data = {};
+
+	if (currentLesson !== 1) {
+		$('.lesson1').hide();
+		$('.lesson' + currentLesson).show();
+	}
+
 
 	// Called after code executed
 	$(regexConsole).on('data', function (e, input, output) {
@@ -12,6 +18,7 @@ define(['jquery', 'console'], function ($, regexConsole) {
 
 			if (result) {
 				$('.lesson' + currentLesson++).hide();
+				localStorage.setItem('currentLesson', currentLesson);
 
 				var $newLesson = $('.lesson' + currentLesson);
 				$newLesson.show();
@@ -33,14 +40,7 @@ define(['jquery', 'console'], function ($, regexConsole) {
 
 	var lessonCompleted = {
 		lesson1: function () {
-			if (data.name) {
-				window.bio = 'A developer called ' +
-					data.firstName + ' is learning regex';
-
-				return true;
-			}
-
-			return false;
+			return !!data.name;
 		},
 
 		lesson2: function (input, output) {
@@ -56,9 +56,20 @@ define(['jquery', 'console'], function ($, regexConsole) {
 			return 'Your name isn\'t code! Stop it.';
 		}
 
+		window.bio = 'A developer called ' + firstName + ' is learning regex';
+
 		data.name = name;
 		data.firstName = firstName;
 
 		return 'Hello, ' + name + '!';
+	};
+
+	window.reset = function () {
+		localStorage.removeItem('currentLesson');
+		localStorage.removeItem('codeSoFar');
+
+		setTimeout(location.reload.bind(location), 100);
+
+		return 'Resetting…';
 	};
 });

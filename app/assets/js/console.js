@@ -11,8 +11,14 @@ define(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 		}
 
 		var $this = $(this),
-			code = $this.val(),
-			result = evaluate(code);
+			code = $this.val();
+
+		if (code.slice(0, 6) === 'reset(') {
+			window.reset();
+			return;
+		}
+
+		var result = evaluate(code);
 
 		if (result instanceof Error) {
 			result = '<strong class="error">' + result + '</strong>';
