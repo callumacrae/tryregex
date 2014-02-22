@@ -18,6 +18,8 @@ requirejs.config({
 require(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 	'use strict';
 
+	var $console = $('.console');
+
 	/**
 	 * When someone presses enter, evaluate code and display result.
 	 */
@@ -47,5 +49,7 @@ require(['jquery', 'evaluate', 'keymap'], function ($, evaluate, keymap) {
 				.html(result);
 
 		$this.val('');
-	});
+
+		$console.scrollTop($console.prop('scrollHeight'));
+	}).focus();
 });
