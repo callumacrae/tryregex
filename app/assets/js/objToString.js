@@ -6,6 +6,10 @@ define(function () {
 			return '[' + obj.map(objToString).join(', ') + ']';
 		}
 
+		if (obj === null) {
+			return 'null';
+		}
+
 		if (typeof obj === 'object' && !(obj instanceof RegExp)) {
 			var objStringArray = [];
 
@@ -26,8 +30,6 @@ define(function () {
 
 		return obj.toString();
 	}
-
-	window.objToString = objToString;
 
 	return objToString;
 });
