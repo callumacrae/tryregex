@@ -42,5 +42,9 @@ define(function () {
 		return 'Answer received';
 	};
 
+	window.shortStory = 'A regular expression (also regex or regexp) is a string.';
+
+	window.shorterStory = '(123) (123456) (123456789)';
+
 	return data;
 });

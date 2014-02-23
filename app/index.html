@@ -28,6 +28,7 @@
 				<h2>Getting started with regex</h2>
 				<p>This interactive tutorial serves as an introduction to regular expressions, specifically regular expressions in JavaScript. This will still teach you to write regular expressions that work in other languages, but you should be aware that there are differences.</p>
 				<p>The console to the left is just a JavaScript console. Type <code>setName('Your name')</code> (substituting your name in) to get started with the tutorial.</p>
+				<p>Use <code>reset()</code> to go back to the beginning and <code>clear()</code> to clear the console.</p>
 			</div>
 
 			<div class="lesson lesson2">
@@ -80,6 +81,38 @@
 				<p>There are a number of "quantifiers" that you can use to say how many times something should be matched. The first one is the question mark, whcih makes the previous token in the expression (the previous character or group of characters) optional.</p>
 				<p>The expression <code>/regexp?/</code> will match both "regex" and "regexp", as the quetion mark makes the p (but only the p) optional.</p>
 				<p>Write an expression that will match both "frontend" and "front-end", and give it as an argument to the <code>answer()</code> function (eg <code>answer(/your expression/)</code>).</p>
+			</div>
+
+			<div class="lesson lesson9">
+				<h2>The plus sign</h2>
+				<p>The next quantifier we'll be looking at it the plus sign. It means "one or more of the previous token"; <code>/Princes+/</code> will match "Princes", "Princess", "Princesssss", etc. It will not, however, match "Prince".</p>
+				<p>The next expression you need to write is a little trickier. Write a regular expression which extracts everything between the opening bracket and the closing bracket of the <code>shortStory</code> variable (note that you can view the contents of the variable just by typing <code>shortStory</code>). Hint: you'll need the previously mentioned dot operator.</p>
+			</div>
+
+			<div class="lesson lesson10">
+				<h2>The asterisk</h2>
+				<p>Similar to the plus sign is the asterisk; but instead of meaning "one or more", the asterisk means "zero or more" of the previous token. <code>/Princes*/</code>, in addition to matching all the examples from <code>/Princes+/</code>, would also match "Prince".</p>
+				<p>Repeat the previous example, but using the asterisk instead of the plus sign. Extract everything from the <code>shortStory</code> variable between the opening and closing brackets, even if there is nothing there.</p>
+			</div>
+
+			<div class="lesson lesson11">
+				<h2>Flags</h2>
+				<p>Now would be a good time to introduce flags; they're not related to quantifiers (not directly, anyway), but they're needed for the next example.</p>
+				<p>Flags are used to modify the behaviour of a regualr expression, and they are specified after the expression (eg <code>/your expression/ig</code>). Each flag is represented by a letter, and JavaScript supports four of—two of which will be covered in this tutorial. The i flag makes the expression case insensitive.</p>
+				<p>Run <code>/CAT/i.exec('Category')</code> to see the i flag in action.</p>
+			</div>
+
+			<div class="lesson lesson12">
+				<h2>Limited repetition</h2>
+				<p>There is one final quantifier that you can use which allows you to limit repetition. The syntax is <code>{min, max}</code> which min is the minimum number of repetitions and max the maximum. For example, <code>/a{3, 5}/</code> would match "aaa", "aaaa" and "aaaaa", but nothing else.</p>
+				<p>Write an expression to match the text between an opening and closing bracket in the <code>shorterStory</code> variable—but only if the contents are between 5 and 8 characters long.</p>
+			</div>
+
+			<div class="lesson lesson13">
+				<h2>More limited repetition</h2>
+				<p>In addition to specifying a range of repetitions, you can specify an exact number of repetitions using <code>{reps}</code>. <code>a{6}</code>, for example, will match exactly six repetitions of the letter a.</p>
+				<p>You can miss out the maximum when using curly brackets, which will at least <em>minimum</em> values, with no maximum. For example, <code>/a{5,}/</code> will match five or more of the letter a.</p>
+				<p>Pass the <code>answer()</code> function the equivilant of <code>/a?b+c*/</code>, but without using any of these characters: <code>?*+</code></p>
 			</div>
 		</div>
 	</div>

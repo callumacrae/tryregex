@@ -78,6 +78,40 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 			var expr = data.lastAnswer;
 			return (expr.test('frontend') && expr.test('front-end'));
+		},
+
+		lesson9: function (input, output) {
+			if (contains(input, 'regex') || contains(input, '*')) {
+				return false;
+			}
+
+			return (output[0] === '(also regex or regexp)');
+		},
+
+		lesson10: function (input, output) {
+			if (contains(input, 'regex') || contains(input, '+')) {
+				return false;
+			}
+
+			return (output[0] === '(also regex or regexp)');
+		},
+
+		lesson11: function (input) {
+			return contains(input, '/CAT/i');
+		},
+
+		lesson12: function (input, output) {
+			if (contains(input, '34')) {
+				return false;
+			}
+
+			return (output[0] === '(123456)');
+		},
+
+		lesson13: function () {
+			// Much meta
+			var answer = data.lastAnswer.toString().replace(/\s/g, '');
+			return (answer === '/a{0,1}b{1,}c{0,}/');
 		}
 	};
 
