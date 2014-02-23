@@ -5,6 +5,10 @@ define(function () {
 
 	// Functions are declared globally so that eval can access them.
 	window.setName = function (name) {
+		if (data.name) {
+			return 'You have already set your name! Type reset() to start again, if you want.';
+		}
+
 		var firstName = name.split(' ')[0];
 
 		if (firstName === 'code') {
