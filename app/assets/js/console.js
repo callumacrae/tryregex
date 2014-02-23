@@ -79,7 +79,14 @@ define(['jquery', 'evaluate', 'keymap', 'objToString'], function ($, evaluate, k
 
 			reverseCmdIndex++;
 
-			$input.val(previousCmds[previousCmds.length - reverseCmdIndex]);
+			var newVal = previousCmds[previousCmds.length - reverseCmdIndex];
+
+			$input.val(newVal);
+
+			// Silly JavaScript!
+			setTimeout(function () {
+				$input[0].selectionStart = $input[0].selectionEnd = newVal.length;
+			});
 		} else if (e.keyCode === keymap.DOWN) {
 			if (reverseCmdIndex < 1) {
 				return;
