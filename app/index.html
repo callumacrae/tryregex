@@ -78,8 +78,8 @@
 
 			<div class="lesson lesson8">
 				<h2>Quantifiers</h2>
-				<p>There are a number of "quantifiers" that you can use to say how many times something should be matched. The first one is the question mark, whcih makes the previous token in the expression (the previous character or group of characters) optional.</p>
-				<p>The expression <code>/regexp?/</code> will match both "regex" and "regexp", as the quetion mark makes the p (but only the p) optional.</p>
+				<p>There are a number of "quantifiers" that you can use to say how many times something should be matched. The first one is the question mark, which makes the previous token in the expression (the previous character or group of characters) optional.</p>
+				<p>The expression <code>/regexp?/</code> will match both "regex" and "regexp", as the question mark makes the p (but only the p) optional.</p>
 				<p>Write an expression that will match both "frontend" and "front-end", and give it as an argument to the <code>answer()</code> function (eg <code>answer(/your expression/)</code>).</p>
 			</div>
 
@@ -137,7 +137,7 @@
 			<div class="lesson lesson17">
 				<h2>Anchors</h2>
 
-				<p>If you want to make sure that an expression starts or ends at a certain place in a word—for example, if you want to make sure that a string starts with a capital letter—then you can use an anchor. The dolar sign matches the end of a string, and the caret sign (^) matches the beginning. <code>/^cat$/</code> will match "cat" and nothing else (while just <code>/cat/</code> will match anything with "cat" in.</p>
+				<p>If you want to make sure that an expression starts or ends at a certain place in a word—for example, if you want to make sure that a string starts with a capital letter—then you can use an anchor. The dollar sign matches the end of a string, and the caret sign (^) matches the beginning. <code>/^cat$/</code> will match "cat" and nothing else (while just <code>/cat/</code> will match anything with "cat" in.</p>
 				<p>Write an expression to test whether the <code>possibleUrl</code> variable starts with "http://" or "https://" and then doesn't contain any spaces all the way to the end.</p>
 				<p>Hint: Use a question mark for the protocol, and then a negated character class for the rest. You'll need both anchors.</p>
 			</div>
