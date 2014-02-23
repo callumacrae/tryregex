@@ -96,23 +96,50 @@
 			</div>
 
 			<div class="lesson lesson11">
-				<h2>Flags</h2>
-				<p>Now would be a good time to introduce flags; they're not related to quantifiers (not directly, anyway), but they're needed for the next example.</p>
-				<p>Flags are used to modify the behaviour of a regualr expression, and they are specified after the expression (eg <code>/your expression/ig</code>). Each flag is represented by a letter, and JavaScript supports four of—two of which will be covered in this tutorial. The i flag makes the expression case insensitive.</p>
-				<p>Run <code>/CAT/i.exec('Category')</code> to see the i flag in action.</p>
-			</div>
-
-			<div class="lesson lesson12">
 				<h2>Limited repetition</h2>
 				<p>There is one final quantifier that you can use which allows you to limit repetition. The syntax is <code>{min, max}</code> which min is the minimum number of repetitions and max the maximum. For example, <code>/a{3, 5}/</code> would match "aaa", "aaaa" and "aaaaa", but nothing else.</p>
 				<p>Write an expression to match the text between an opening and closing bracket in the <code>shorterStory</code> variable—but only if the contents are between 5 and 8 characters long.</p>
 			</div>
 
-			<div class="lesson lesson13">
+			<div class="lesson lesson12">
 				<h2>More limited repetition</h2>
 				<p>In addition to specifying a range of repetitions, you can specify an exact number of repetitions using <code>{reps}</code>. <code>a{6}</code>, for example, will match exactly six repetitions of the letter a.</p>
 				<p>You can miss out the maximum when using curly brackets, which will at least <em>minimum</em> values, with no maximum. For example, <code>/a{5,}/</code> will match five or more of the letter a.</p>
 				<p>Pass the <code>answer()</code> function the equivilant of <code>/a?b+c*/</code>, but without using any of these characters: <code>?*+</code></p>
+			</div>
+
+			<div class="lesson lesson13">
+				<h2>Flags—the case insensitive flag</h2>
+				<p>Flags are used to modify the behaviour of a regular expression, and they are specified after the expression (eg <code>/your expression/ig</code>). Each flag is represented by a letter, and JavaScript supports four of—two of which will be covered in this tutorial. The i flag makes the expression case insensitive—while without the flag <code>/a/</code> would match "a" and not "A", <code>/a/i</code> would match both "a" and "A".</p>
+				<p>Run <code>/CAT/i.exec('Category')</code> to see the i flag in action.</p>
+			</div>
+
+			<div class="lesson lesson14">
+				<h2>Flags—The global flag</h2>
+				<p>The second commonly used flag is the global flag, represented by the letter g. While <code>/a/</code> only matches the first a in the string given to it, <code>/a/g</code> would match every single letter a.</p>
+				<p>Write a regular expression to replace every instance of the letter "a" in the <code>shortStory</code> variable with the letter "e".</p>
+			</div>
+
+			<div class="lesson lesson15">
+				<h2>Character classes</h2>
+				<p>Character classes allow you to specify a set or range of characters to be matched. <code>/[aeiou]/</code> matches any vowel, <code>/[a-m]/</code> matches any letter in the first half of the alphabet, and <code>/[aeiou0-9]/</code> matches any vowel or digit.</p>
+				<p>Note that inside a character class, you don't need to escape dots and they will be matched literally. If you want a literal hyphen, however, you will need to escape it.</p>
+				<p>We're given a string which should contain a username consisting of 5 to 12 letters (uppercase or lowercase) or hyphens. Write some code that will return true if the <code>username</code> variable contains a valid username.</p>
+			</div>
+
+			<div class="lesson lesson16">
+				<h2>Negated character classes</h2>
+				<p>A <em>negated</em> character class will match any character that <em>isn't</em> in the character class. For example, <code>/[^a-m]/</code> will match "z" and "$", but it will not match "c".</p>
+				<p>It's important to note the distinction between "not [a-m]" and "something that isn't [a-m]". <code>/c[^a]t/</code> will match "cut", but it won't match "cat" and it won't match "ct"—this is important.</p>
+				<p>The username can now contain any character that isn't a space (but still has to be between 5 and 12 characters long). Write a new expression to validate the <code>username</code> variable.</p>
+			</div>
+
+			<div class="lesson lesson17">
+				<h2>Anchors</h2>
+
+				<p>If you want to make sure that an expression starts or ends at a certain place in a word—for example, if you want to make sure that a string starts with a capital letter—then you can use an anchor. The dolar sign matches the end of a string, and the caret sign (^) matches the beginning. <code>/^cat$/</code> will match "cat" and nothing else (while just <code>/cat/</code> will match anything with "cat" in.</p>
+				<p>Write an expression to test whether the <code>possibleUrl</code> variable starts with "http://" or "https://" and then doesn't contain any spaces all the way to the end.</p>
+				<p>Hint: Use a question mark for the protocol, and then a negated character class for the rest. You'll need both anchors.</p>
 			</div>
 		</div>
 	</div>
@@ -135,8 +162,6 @@
 	</div>
 
 	<script data-main="assets/js/app" src="assets/js/bower/requirejs/require.js"></script>
-
-
 
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

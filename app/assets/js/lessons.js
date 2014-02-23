@@ -96,11 +96,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return (output[0] === '(also regex or regexp)');
 		},
 
-		lesson11: function (input) {
-			return contains(input, '/CAT/i');
-		},
-
-		lesson12: function (input, output) {
+		lesson11: function (input, output) {
 			if (contains(input, '34')) {
 				return false;
 			}
@@ -108,10 +104,94 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return (output[0] === '(123456)');
 		},
 
-		lesson13: function () {
+		lesson12: function () {
 			// Much meta
 			var answer = data.lastAnswer.toString().replace(/\s/g, '');
 			return (answer === '/a{0,1}b{1,}c{0,}/');
+		},
+
+		lesson13: function (input) {
+			return contains(input, '/CAT/i');
+		},
+
+		lesson14: function (input, output) {
+			var expected = window.shortStory.replace(/a/g, 'e');
+			return output.slice(1) === expected.slice(1); // Ignore first char
+		},
+
+		lesson15: function (input, output) {
+			if (output !== true) {
+				return false;
+			}
+
+			var regex = getRegex(input);
+
+			var result = regex.exec('BobbyTables');
+			if (result === null || result[0] !== 'BobbyTables') {
+				return false;
+			}
+
+			result = regex.exec('Bobby-Tables');
+			if (result === null || result[0] !== 'Bobby-Tables') {
+				return false;
+			}
+
+			result = regex.exec('Bobby');
+			if (result === null || result[0] !== 'Bobby') {
+				return false;
+			}
+
+			if (regex.test('B0bby')) {
+				return false;
+			}
+
+			if (regex.test('abc')) {
+				return false;
+			}
+
+			return true;
+		},
+
+		lesson16: function (input, output) {
+			if (output !== true) {
+				return false;
+			}
+
+			var regex = getRegex(input);
+
+			var result = regex.exec('Bobby-Tables');
+			if (result === null || result[0] !== 'Bobby-Tables') {
+				return false;
+			}
+
+			result = regex.exec('B0bby');
+			if (result === null || result[0] !== 'B0bby') {
+				return false;
+			}
+
+			if (regex.test('abc')) {
+				return false;
+			}
+
+			if (regex.test('abc abc')) {
+				return false;
+			}
+
+			return true;
+		},
+
+		lesson17: function (input, output) {
+			if (contains(input, 'test') && output !== true) {
+				return false;
+			}
+
+			if ((contains(input, 'exec') || contains(input, 'match')) &&
+				(!$.isArray(output) || output[0] !== window.possibleUrl)) {
+				return false;
+			}
+
+			output = getRegex(input).exec(window.possibleUrl);
+			return $.isArray(output) && output[0] === window.possibleUrl;
 		}
 	};
 
@@ -132,5 +212,16 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 	function contains(string, substr) {
 		return string.indexOf(substr) !== -1;
+	}
+
+	function getRegex(input) {
+		input = input.split('.')[0].slice(1);
+
+		var lastIndex = input.lastIndexOf('/');
+
+		var body = input.slice(0, lastIndex);
+		var flags = input.slice(lastIndex + 1);
+
+		return new RegExp(body, flags);
 	}
 });

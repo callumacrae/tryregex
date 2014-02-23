@@ -46,5 +46,9 @@ define(function () {
 
 	window.shorterStory = '(123) (123456) (123456789)';
 
+	window.username = 'BobbyTables';
+
+	window.possibleUrl = 'https://example.com/';
+
 	return data;
 });
