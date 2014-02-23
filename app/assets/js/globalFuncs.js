@@ -48,9 +48,18 @@ define(function () {
 
 	window.username = 'BobbyTables';
 
+	window.charTypeTest = 'Matinée 1920';
+
 	window.possibleUrl = 'https://example.com/';
 
 	window.rabbit = 'The rabbit ate';
+
+	window.userData = 'user1=sad;\nuser2=angry;\n' +
+		window.username + '=happy;\nuser4=crazy';
+
+	window.boldText = '**bold text!**';
+
+	window.partialSums = '1+1,2+2,3+3=,8+10,10+10+20,6+3=9,5+3';
 
 	return data;
 });

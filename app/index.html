@@ -135,14 +135,20 @@
 			</div>
 
 			<div class="lesson lesson17">
-				<h2>Anchors</h2>
+				<h2>Character types</h2>
+				<p>Character types can be used as shorthand for common character classes. There are six character types: <code>\d</code> matches decimal digits (0-9), <code>\s</code> matches whitespace characters, and <code>\w</code> matches word characters (letters—including international characters—numbers and the underscore).</p>
+				<p>The other three character types can be found by capitalising the first three character types, which will negate their effect; <code>\S</code> while match any non-whitespace character, for example.</p>
+				<p>Write an expression to match a word, followed by a space, followed by a string of digits. Test the <code>charTypeTest</code> variable with it: don't use any literal characters.</p>
+			</div>
 
+			<div class="lesson lesson18">
+				<h2>Anchors</h2>
 				<p>If you want to make sure that an expression starts or ends at a certain place in a word—for example, if you want to make sure that a string starts with a capital letter—then you can use an anchor. The dollar sign matches the end of a string, and the caret sign (^) matches the beginning. <code>/^cat$/</code> will match "cat" and nothing else (while just <code>/cat/</code> will match anything with "cat" in.</p>
 				<p>Write an expression to test whether the <code>possibleUrl</code> variable starts with "http://" or "https://" and then doesn't contain any spaces all the way to the end.</p>
 				<p>Hint: Use a question mark for the protocol, and then a negated character class for the rest. You'll need both anchors.</p>
 			</div>
 
-			<div class="lesson lesson18">
+			<div class="lesson lesson19">
 				<h2>Capturing groups</h2>
 				<p>You can use parentheses to create groups, which can group multiple tokens together or store a result for later reference:</p>
 				<pre><code>/"(.+)"/</code></pre>
@@ -151,13 +157,13 @@
 				<p>Take our previous example where we grabbed the data between two parentheses using an expression like <code>/\(.{5,8}\)/.exec(shorterStory)</code>. Try running that again, and then wrapping "<code>.{5,8}</code>" in parentheses and trying again.</p>
 			</div>
 
-			<div class="lesson lesson19">
+			<div class="lesson lesson20">
 				<h2>Non-capturing groups</h2>
 				<p>You can see that the array is now two items long: the first item is the entire match, and the second is only the data that the capturing group matched.</p>
 				<p>There is another type of group called a non-capturing group. This type of group, which has a slightly different syntax, doesn't store the value to an array. If you don't need to refer back to the group, you should prefer a non-capturing group: it keeps the return array cleaner. Turn the group in the previous expression into a non-capturing group by inserting "<code>?:</code>" into the beginning of the group before the dot.</p>
 			</div>
 
-			<div class="lesson lesson20">
+			<div class="lesson lesson21">
 				<h2>Quantifiers</h2>
 				<p>It's almost as if we don't have a group.</p>
 				<p>The main use of non-capturing groups is to apply a quantifier to a number of tokens. The following would match "I ate" and "{{ firstName }} and I ate", but nothing else:</p>
@@ -166,18 +172,70 @@
 				<p>Hint: your expression shouldn't match "hahah".</p>
 			</div>
 
-			<div class="lesson lesson21">
+			<div class="lesson lesson22">
 				<h2>The pipe symbol</h2>
 				<p>You can specify an "or" using the pipe symbol (|). The following will match "The dog ate" and "The cat ate":</p>
 				<pre><code>/The (dog|cat) ate/</code></pre>
 				<p>We could also use a non-capturing group, but in this case we wanted to access the result. You can use as many pipes in one group as you want. Make the previous expression match "The rabbit ate" (currently stored in the <code>rabbit</code> variable), in addition to what it used to match.</p>
 			</div>
 
-			<div class="lesson lesson22">
+			<div class="lesson lesson23">
 				<h2>Backreferences</h2>
 				<p>You can reference the value of a previous capturing group later within the same expression. You simply write a backslash followed by the number of the capturing group (the index of where it will be in the returned array). For example, the following will match "The cat ate with the other cat" and "The dog ate with the other dog", but not "the cat ate with the other dog" (after all, that would just be absurd):</p>
 				<pre><code>/The (dog|cat) ate with the other \1/</code></pre>
 				<p>Write an expression to match the same two words in a row: give the expression to the <code>answer()</code> function as in previous examples.</p>
+			</div>
+
+			<div class="lesson lesson24">
+				<h2>The RegExp object</h2>
+				<p>In addition to the literal operator (the slashes), JavaScript provides a RegExp constructor which allows you to specify your desired expression as a string. This is useful for putting variable in expressions. It works like this:</p>
+				<pre><code>// Same as /regexp?/ig
+new RegExp('regexp?', 'ig');</code></pre>
+				<p>The username contains a variable (still). The <code>userData</code> variable contains user data: print it to the console to see the format of the data. Use the <code>username</code> variable to extract hte word associated with our user.</p>
+			</div>
+
+			<div class="lesson lesson25">
+				<h2>Advanced replacement</h2>
+				<p>We've seen two ways in which capturing groups can have their captured value used later on: the first was the returned array, and the second was in a backreference. You can also access them from the second argument of the string <code>.replace()</code> method:</p>
+				<pre><code>var text = '*italic text*';
+var replace = '&lt;em&gt;$1&lt;/em&gt;';
+text.replace(/\*([^*]+)\*/, replace);</code></pre>
+				<p>Write some similar code, but to turn the value of the <code>boldText</code> variable into a <code>&lt;strong&gt;</code> element.</p>
+			</div>
+
+			<div class="lesson lesson26">
+				<h2>Lazy vs greedy matching</h2>
+				<p>By default, pattern matching in JavaScript is "greedy", which means that it matches as much as it possibly can:</p>
+				<pre><code>'"Hi", "Hello"'.match(/".+"/)</code></pre>
+				<p>That will return <code>"Hi", "Hello"</code>, as it matches the two outermost quotes. Lazy pattern matching is the opposite of greedy pattern matching, and will match as little as possible—so in this case, only <code>"Hi"</code>.</p>
+				<p>Lazy pattern matching can be achieved by putting a question mark after the quantifier—try it out with the example above.</p>
+			</div>
+
+			<div class="lesson lesson27">
+				<h2>Assertions</h2>
+				<p>An assertion is a pattern that should be matched, but will not be stored: so instead of "match a and then b", we have "match a that is followed by b, but don't match b". There are two types of assertion supported in JavaScript, positive lookaheads and negative lookaheads. Lookaheads just means looking forwards; JavaScript doesn't support lookbehinds.</p>
+				<p>A positive lookahead means that we want to look ahead for a match. To look for an a followed by a b, we could use <code>/a(?=b)/</code>.</p>
+				<p>Use an assertion to extract "6+3" from the <code>partialSums</code> variable. Don't use any literal digits, use <code>\d</code>.</p>
+			</div>
+
+			<div class="lesson lesson28">
+				<h2>Negative assertions</h2>
+				<p>Assertions can also be negative, to say that you want to match something that <em>isn't</em> followed by something. Note that unlike a character class, this can match something that isn't that—if you say "a that isn't followed by b", the a can be at the end of the string.</p>
+				<p>Use a positive assertion followed by a negative assertion to extract "3+3" from the <code>partialSums</code> variable.</p>
+			</div>
+
+			<div class="lesson lesson29">
+				<h2>You have finished</h2>
+				<p>Congratulations, {{ firstName }}, on finishing Try Regex. You've now briefly covered most areas of regular expressions in JavaScript, and you should be able to write regex for most situations.</p>
+				<p>For further reading, try out the following links:</p>
+
+				<ul>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Mozilla Developer Network: Regular Expressions</a></li>
+					<li><a href="http://tech.pro/tutorial/1214/javascript-regular-expression-enlightenment">JavaScript Regular Expression Enlightenment</a> by Cody Lindley</li>
+					<li><a href="http://refcardz.dzone.com/refcardz/regular-expressions">DZone: The Essential Regular Expressions Cheat Sheet</a> by Callum Macrae</li>
+					<li><a href="http://leaverou.github.io/regexplained/">RegExp playground</a> by Lea Verou</li>
+					<li><a href="http://www.regular-expressions.info/tutorial.html">regular-expressions.info</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>

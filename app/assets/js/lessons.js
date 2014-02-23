@@ -85,7 +85,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				return false;
 			}
 
-			return (output[0] === '(also regex or regexp)');
+			return (output && output[0] === '(also regex or regexp)');
 		},
 
 		lesson10: function (input, output) {
@@ -93,7 +93,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				return false;
 			}
 
-			return (output[0] === '(also regex or regexp)');
+			return (output && output[0] === '(also regex or regexp)');
 		},
 
 		lesson11: function (input, output) {
@@ -101,7 +101,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				return false;
 			}
 
-			return (output[0] === '(123456)');
+			return (output && output[0] === '(123456)');
 		},
 
 		lesson12: function () {
@@ -189,6 +189,18 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 		},
 
 		lesson17: function (input, output) {
+			if (contains(input, 'Matinée 1920'.split(''))) {
+				return false;
+			}
+
+			if (contains(input, 'test')) {
+				return output;
+			}
+
+			return $.isArray(output) && output[0] === window.charTypeTest;
+		},
+
+		lesson18: function (input, output) {
 			if (contains(input, 'test') && output !== true) {
 				return false;
 			}
@@ -208,11 +220,11 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return $.isArray(output) && output[0] === window.possibleUrl;
 		},
 
-		lesson18: function (input, output) {
+		lesson19: function (input, output) {
 			return ($.isArray(output) && output[1] === '123456');
 		},
 
-		lesson19: function (input, output) {
+		lesson20: function (input, output) {
 			if (!contains(input, '(?:')) {
 				return false;
 			}
@@ -220,7 +232,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return ($.isArray(output) && output.length === 1);
 		},
 
-		lesson20: function () {
+		lesson21: function () {
 			var expr = data.lastAnswer;
 
 			return (expr.test('haha') && expr.test('hahaha') &&
@@ -228,7 +240,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				!expr.test('hahahah'));
 		},
 
-		lesson21: function (input, output) {
+		lesson22: function (input, output) {
 			if (contains(input, ['dog', 'cat', 'rabbit'])) {
 				return output === true ||
 					($.isArray(output) && output[1] === 'rabbit');
@@ -237,7 +249,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return false;
 		},
 
-		lesson22: function () {
+		lesson23: function () {
 			var regex = data.lastAnswer;
 
 			// Everything here should be true
@@ -251,6 +263,46 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			].reduce(function (prev, curr) {
 					return prev && curr;
 				}, true);
+		},
+
+		lesson24: function (input, output) {
+			if (!contains(input, 'username') || contains(input, 'Bob')) {
+				return false;
+			}
+
+			return ($.isArray(output) && output[1] === 'happy');
+		},
+
+		lesson25: function (input, output) {
+			if (!contains(input, 'replace') || contains(input, '**')) {
+				return false;
+			}
+
+			return output === '<strong>bold text!</strong>';
+		},
+
+		lesson26: function (input, output) {
+			if (!contains(input, '.+?')) {
+				return false;
+			}
+
+			return $.isArray(output) && output[0] === '"Hi"';
+		},
+
+		lesson27: function (input, output) {
+			if (!contains(input, '(?=') || /\d/.test(input)) {
+				return false;
+			}
+
+			return $.isArray(output) && output[0] === '6+3';
+		},
+
+		lesson28: function (input, output) {
+			if (!contains(input, ['(?=', '(?!']) || /\d/.test(input)) {
+				return false;
+			}
+
+			return $.isArray(output) && output[0] === '3+3';
 		}
 	};
 

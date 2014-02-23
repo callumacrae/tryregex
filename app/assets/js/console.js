@@ -39,10 +39,12 @@ define(['jquery', 'evaluate', 'keymap', 'objToString'], function ($, evaluate, k
 				return;
 			}
 
-			var result = evaluate(code);
+			var result = evaluate(code),
+				error = false;
 
 			if (result instanceof Error) {
 				result = '<strong class="error">' + result + '</strong>';
+				error = true;
 			} else {
 				$(eventObject).trigger('data', [code, result]);
 				result = objToString(result);
@@ -60,7 +62,7 @@ define(['jquery', 'evaluate', 'keymap', 'objToString'], function ($, evaluate, k
 				.removeClass('prompt-result')
 				.insertBefore($this.parent())
 				.find('code')
-				.html(result);
+				[error ? 'html' : 'text'](result);
 
 			$this.val('');
 
