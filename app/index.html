@@ -141,6 +141,44 @@
 				<p>Write an expression to test whether the <code>possibleUrl</code> variable starts with "http://" or "https://" and then doesn't contain any spaces all the way to the end.</p>
 				<p>Hint: Use a question mark for the protocol, and then a negated character class for the rest. You'll need both anchors.</p>
 			</div>
+
+			<div class="lesson lesson18">
+				<h2>Capturing groups</h2>
+				<p>You can use parentheses to create groups, which can group multiple tokens together or store a result for later reference:</p>
+				<pre><code>/"(.+)"/</code></pre>
+				<p>That's an example of a capturing group, meaning that the part of the matched string within the parentheses is saved to a later point in the array returned by <code>.match()</code> or <code>.exec()</code>.</p>
+
+				<p>Take our previous example where we grabbed the data between two parentheses using an expression like <code>/\(.{5,8}\)/.exec(shorterStory)</code>. Try running that again, and then wrapping "<code>.{5,8}</code>" in parentheses and trying again.</p>
+			</div>
+
+			<div class="lesson lesson19">
+				<h2>Non-capturing groups</h2>
+				<p>You can see that the array is now two items long: the first item is the entire match, and the second is only the data that the capturing group matched.</p>
+				<p>There is another type of group called a non-capturing group. This type of group, which has a slightly different syntax, doesn't store the value to an array. If you don't need to refer back to the group, you should prefer a non-capturing group: it keeps the return array cleaner. Turn the group in the previous expression into a non-capturing group by inserting "<code>?:</code>" into the beginning of the group before the dot.</p>
+			</div>
+
+			<div class="lesson lesson20">
+				<h2>Quantifiers</h2>
+				<p>It's almost as if we don't have a group.</p>
+				<p>The main use of non-capturing groups is to apply a quantifier to a number of tokens. The following would match "I ate" and "{{ firstName }} and I ate", but nothing else:</p>
+				<pre><code>/^(?:{{ firstName }} and )?I ate$/</code></pre>
+				<p>Write an expression which matches "ha" repeated two or more times (eg, "haha" or "hahahahaha"), and pass it the <code>answer()</code> function.</p>
+				<p>Hint: your expression shouldn't match "hahah".</p>
+			</div>
+
+			<div class="lesson lesson21">
+				<h2>The pipe symbol</h2>
+				<p>You can specify an "or" using the pipe symbol (|). The following will match "The dog ate" and "The cat ate":</p>
+				<pre><code>/The (dog|cat) ate/</code></pre>
+				<p>We could also use a non-capturing group, but in this case we wanted to access the result. You can use as many pipes in one group as you want. Make the previous expression match "The rabbit ate" (currently stored in the <code>rabbit</code> variable), in addition to what it used to match.</p>
+			</div>
+
+			<div class="lesson lesson22">
+				<h2>Backreferences</h2>
+				<p>You can reference the value of a previous capturing group later within the same expression. You simply write a backslash followed by the number of the capturing group (the index of where it will be in the returned array). For example, the following will match "The cat ate with the other cat" and "The dog ate with the other dog", but not "the cat ate with the other dog" (after all, that would just be absurd):</p>
+				<pre><code>/The (dog|cat) ate with the other \1/</code></pre>
+				<p>Write an expression to match the same two words in a row: give the expression to the <code>answer()</code> function as in previous examples.</p>
+			</div>
 		</div>
 	</div>
 

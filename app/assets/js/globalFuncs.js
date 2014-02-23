@@ -50,5 +50,7 @@ define(function () {
 
 	window.possibleUrl = 'https://example.com/';
 
+	window.rabbit = 'The rabbit ate';
+
 	return data;
 });

@@ -206,6 +206,51 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 			output = regex.exec(window.possibleUrl);
 			return $.isArray(output) && output[0] === window.possibleUrl;
+		},
+
+		lesson18: function (input, output) {
+			return ($.isArray(output) && output[1] === '123456');
+		},
+
+		lesson19: function (input, output) {
+			if (!contains(input, '(?:')) {
+				return false;
+			}
+
+			return ($.isArray(output) && output.length === 1);
+		},
+
+		lesson20: function () {
+			var expr = data.lastAnswer;
+
+			return (expr.test('haha') && expr.test('hahaha') &&
+				expr.test('hahahahaha') && !expr.test('ha') &&
+				!expr.test('hahahah'));
+		},
+
+		lesson21: function (input, output) {
+			if (contains(input, ['dog', 'cat', 'rabbit'])) {
+				return output === true ||
+					($.isArray(output) && output[1] === 'rabbit');
+			}
+
+			return false;
+		},
+
+		lesson22: function () {
+			var regex = data.lastAnswer;
+
+			// Everything here should be true
+			return [
+				regex.test('test test'),
+				regex.test('This test test'),
+				!regex.test('hello world hello'),
+				regex.test('hi hi there'),
+				regex.test('this is is a test'),
+				!regex.test('nope no match')
+			].reduce(function (prev, curr) {
+					return prev && curr;
+				}, true);
 		}
 	};
 
@@ -225,6 +270,12 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 	}
 
 	function contains(string, substr) {
+		if ($.isArray(substr)) {
+			return substr.reduce(function (prev, actualSubstr) {
+				return prev && contains(string, actualSubstr);
+			}, true);
+		}
+
 		return string.indexOf(substr) !== -1;
 	}
 
