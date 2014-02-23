@@ -1,6 +1,6 @@
 # Try Regex
 
-Try Regex is an interactive regular expressions tutorial inspired by [Try Ruby](http://tryruby.org/) and [Try Haskell](http://tryhaskell.org/). Check it out at <http://macr.ae/tryregex/>.
+Try Regex is an interactive regular expressions tutorial inspired by [Try Ruby](http://tryruby.org/) and [Try Haskell](http://tryhaskell.org/). Check it out at <http://tryregex.com/>.
 
 This project was conceived at the [HackKing's Hackathon](http://www.hackkings.org/) in London.
 
