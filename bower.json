@@ -5,9 +5,7 @@
   ],
   "dependencies": {
     "reset-css": "latest",
-    "jquery": "1.10.2"
-  },
-  "devDependencies": {
-    "requirejs": "~2.1.9"
+    "jquery": "1.10.2",
+	  "requirejs": "~2.1.9"
   }
 }
