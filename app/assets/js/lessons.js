@@ -126,6 +126,10 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 			var regex = getRegex(input);
 
+			if (!regex) {
+				return false;
+			}
+
 			var result = regex.exec('BobbyTables');
 			if (result === null || result[0] !== 'BobbyTables') {
 				return false;
@@ -159,6 +163,10 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 			var regex = getRegex(input);
 
+			if (!regex) {
+				return false;
+			}
+
 			var result = regex.exec('Bobby-Tables');
 			if (result === null || result[0] !== 'Bobby-Tables') {
 				return false;
@@ -190,7 +198,13 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				return false;
 			}
 
-			output = getRegex(input).exec(window.possibleUrl);
+			var regex = getRegex(input);
+
+			if (!regex) {
+				return false;
+			}
+
+			output = regex.exec(window.possibleUrl);
 			return $.isArray(output) && output[0] === window.possibleUrl;
 		}
 	};
@@ -215,11 +229,20 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 	}
 
 	function getRegex(input) {
-		input = input.split('.')[0].slice(1);
+		if (contains(input, 'test') || contains(input, 'exec')) {
+			input = input.split('.')[0];
+		} else {
+			input = input.slice(input.indexOf('(') + 1, input.lastIndexOf(')'));
+		}
+
+
+		if (!/^\/.+\/[igny]*$/.test(input)) {
+			return false;
+		}
 
 		var lastIndex = input.lastIndexOf('/');
 
-		var body = input.slice(0, lastIndex);
+		var body = input.slice(1, lastIndex);
 		var flags = input.slice(lastIndex + 1);
 
 		return new RegExp(body, flags);
