@@ -52,7 +52,7 @@ define(function () {
 
 	window.username = 'BobbyTables';
 
-	window.charTypeTest = 'Matinée 1920';
+	window.charTypeTest = 'Approximately 1920';
 
 	window.possibleUrl = 'https://example.com/';
 

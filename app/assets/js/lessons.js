@@ -44,8 +44,14 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 		},
 
 		lesson5: function (input, output) {
-			var expected = window.bio.replace(data.firstName, '[redacted]');
-			return contains(input, 'replace') && output === expected;
+			if (!contains(input, 'replace')) {
+				return false;
+			}
+
+			var bioExpr = window.bio.replace(data.firstName, '(.+)'),
+				match = new RegExp('^' + bioExpr + '$').exec(output);
+
+			return (match !== null && match[1] !== data.firstName);
 		},
 
 		lesson6: function (input, output) {
@@ -111,10 +117,14 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 		},
 
 		lesson13: function (input) {
-			return contains(input, '/CAT/i');
+			return contains(input.toLowerCase(), '/cat/i');
 		},
 
 		lesson14: function (input, output) {
+			if (!contains(input, 'replace')) {
+				return false;
+			}
+
 			var expected = window.shortStory.replace(/a/g, 'e');
 			return output.slice(1) === expected.slice(1); // Ignore first char
 		},
@@ -188,16 +198,16 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return true;
 		},
 
-		lesson17: function (input, output) {
-			if (contains(input, 'Matinée 1920'.split(''))) {
+		// /\d+\s\w+/.exec(charTypeTest)
+		lesson17: function (input) {
+			if (!contains(input, ['\\w', '\\d'])) {
 				return false;
 			}
 
-			if (contains(input, 'test')) {
-				return output;
-			}
+			var regex = getRegex(input),
+				realOut = regex.exec(window.charTypeTest);
 
-			return $.isArray(output) && output[0] === window.charTypeTest;
+			return $.isArray(realOut) && realOut[0] === window.charTypeTest;
 		},
 
 		lesson18: function (input, output) {

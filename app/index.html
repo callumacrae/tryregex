@@ -103,33 +103,34 @@
 
 			<div class="lesson lesson12">
 				<h2>More limited repetition</h2>
-				<p>In addition to specifying a range of repetitions, you can specify an exact number of repetitions using <code>{reps}</code>. <code>a{6}</code>, for example, will match exactly six repetitions of the letter a.</p>
+				<p>In addition to specifying a range of repetitions, you can specify an exact number of repetitions using <code>{n}</code> where n is the number of repetitions. The expression <code>a{6}</code>, for example, will match exactly six repetitions of the letter a.</p>
 				<p>You can leave out the maximum when using curly brackets, which will match at least <em>minimum</em> values, with no maximum limit. For example, <code>/a{5,}/</code> will match five or more of the letter a.</p>
 				<p>Pass the <code>answer()</code> function the equivilant of <code>/a?b+c*/</code>, but without using any of these characters: <code>?*+</code></p>
 			</div>
 
 			<div class="lesson lesson13">
 				<h2>Flags—the case insensitive flag</h2>
-				<p>Flags are used to modify the behaviour of a regular expression, and they are specified after the expression (eg <code>/your expression/ig</code>). Each flag is represented by a letter, and JavaScript supports four of—two of which will be covered in this tutorial. The i flag makes the expression case insensitive—while without the flag <code>/a/</code> would match "a" and not "A", <code>/a/i</code> would match both "a" and "A".</p>
-				<p>Run <code>/CAT/i.exec('Category')</code> to see the i flag in action.</p>
+				<p>Flags are used to modify the behaviour of a regular expression, and they are specified after the expression (eg <code>/your expression/ig</code>). Each flag is represented by a letter, and JavaScript supports four of—two of which will be covered in this tutorial. The <code>i</code> flag makes the expression case insensitive—while without the flag <code>/a/</code> would match "a" and not "A", <code>/a/i</code> would match both "a" and "A".</p>
+				<p>Run <code>/CAT/i.exec('Category')</code> to see the <code>i</code> flag in action.</p>
 			</div>
 
 			<div class="lesson lesson14">
 				<h2>Flags—The global flag</h2>
-				<p>The second commonly used flag is the global flag, represented by the letter g. While <code>/a/</code> only matches the first a in the string given to it, <code>/a/g</code> would match every single letter a.</p>
+				<p>The second commonly used flag is the global flag, represented by the letter <code>g</code>. While <code>/a/</code> only matches the first a in the string given to it, <code>/a/g</code> would match every single letter a.</p>
 				<p>Write a regular expression to replace every instance of the letter "a" in the <code>shortStory</code> variable with the letter "e".</p>
+				<p>Remember that strings have a <code>.replace(expr, replace)</code> method that you can use for replacements.</p>
 			</div>
 
 			<div class="lesson lesson15">
 				<h2>Character classes</h2>
 				<p>Character classes allow you to specify a set or range of characters to be matched. <code>/[aeiou]/</code> matches any vowel, <code>/[a-m]/</code> matches any letter in the first half of the alphabet, and <code>/[aeiou0-9]/</code> matches any vowel or digit.</p>
 				<p>Note that inside a character class, you don't need to escape dots and they will be matched literally. If you want a literal hyphen, however, you will need to escape it.</p>
-				<p>We're given a string which should contain a username consisting of 5 to 12 letters (uppercase or lowercase) or hyphens. Write some code that will return true if the <code>username</code> variable contains a valid username.</p>
+				<p>We're given a string which should contain a username consisting of 5 to 12 letters (uppercase or lowercase) or hyphens. Write some code that will <strong>return true</strong> if the <code>username</code> variable contains a valid username.</p>
 			</div>
 
 			<div class="lesson lesson16">
 				<h2>Negated character classes</h2>
-				<p>A <em>negated</em> character class will match any character that <em>isn't</em> in the character class. For example, <code>/[^a-m]/</code> will match "z" and "$", but it will not match "c".</p>
+				<p>A <em>negated</em> character class will match any character that <em>isn't</em> in the character class. You negate a character class by putting a caret character (^) at the beginning of the class. For example, <code>/[^a-m]/</code> will match "z" and "$", but it will not match "c".</p>
 				<p>It's important to note the distinction between "not [a-m]" and "something that isn't [a-m]". <code>/c[^a]t/</code> will match "cut", but it won't match "cat" and it won't match "ct"—this is important.</p>
 				<p>The username can now contain any character that isn't a space (but still has to be between 5 and 12 characters long). Write a new expression to validate the <code>username</code> variable.</p>
 			</div>
@@ -142,7 +143,7 @@
 			</div>
 
 			<div class="lesson lesson18">
-				<h2>Anchors</h2>
+				<h2>Positions</h2>
 				<p>If you want to make sure that an expression starts or ends at a certain place in a word—for example, if you want to make sure that a string starts with a capital letter—then you can use an anchor. The dollar sign matches the end of a string, and the caret sign (^) matches the beginning. <code>/^cat$/</code> will match "cat" and nothing else (while just <code>/cat/</code> will match anything with "cat" in.</p>
 				<p>Write an expression to test whether the <code>possibleUrl</code> variable starts with "http://" or "https://" and then doesn't contain any spaces all the way to the end.</p>
 				<p>Hint: Use a question mark for the protocol, and then a negated character class for the rest. You'll need both anchors.</p>
@@ -191,7 +192,7 @@
 				<p>In addition to the literal operator (the slashes), JavaScript provides a RegExp constructor which allows you to specify your desired expression as a string. This is useful for putting variable in expressions. It works like this:</p>
 				<pre><code>// Same as /regexp?/ig
 new RegExp('regexp?', 'ig');</code></pre>
-				<p>The username contains a variable (still). The <code>userData</code> variable contains user data: print it to the console to see the format of the data. Use the <code>username</code> variable to extract hte word associated with our user.</p>
+				<p>The username contains a variable (still). The <code>userData</code> variable contains user data: print it to the console to see the format of the data. Use the <code>username</code> variable to extract the word associated with our user.</p>
 			</div>
 
 			<div class="lesson lesson25">
@@ -221,6 +222,7 @@ text.replace(/\*([^*]+)\*/, replace);</code></pre>
 			<div class="lesson lesson28">
 				<h2>Negative assertions</h2>
 				<p>Assertions can also be negative, to say that you want to match something that <em>isn't</em> followed by something. Note that unlike a character class, this can match something that isn't that—if you say "a that isn't followed by b", the a can be at the end of the string.</p>
+				<p>The syntax for a negative assertion is similar to that of a positive assertion, but you replace the equals sign with an exclamation mark: for example, <code>/a(?!b)/</code> would find a letter a that isn't followed by a letter b.</p>
 				<p>Use a positive assertion followed by a negative assertion to extract "3+3" from the <code>partialSums</code> variable.</p>
 			</div>
 
@@ -234,7 +236,7 @@ text.replace(/\*([^*]+)\*/, replace);</code></pre>
 					<li><a href="http://tech.pro/tutorial/1214/javascript-regular-expression-enlightenment">JavaScript Regular Expression Enlightenment</a> by Cody Lindley</li>
 					<li><a href="http://refcardz.dzone.com/refcardz/regular-expressions">DZone: The Essential Regular Expressions Cheat Sheet</a> by Callum Macrae</li>
 					<li><a href="http://leaverou.github.io/regexplained/">RegExp playground</a> by Lea Verou</li>
-					<li><a href="http://www.regular-expressions.info/tutorial.html">regular-expressions.info</a></li>
+					<li><a href="http://www.regular-expressions.info/tutorial.html">regular-expressions.info</a> for a general, non-language-specific guide.</li>
 				</ul>
 			</div>
 		</div>
