@@ -10,6 +10,10 @@ define(function () {
 			return 'null';
 		}
 
+		if (typeof obj === 'undefined') {
+			return 'undefined';
+		}
+
 		if (typeof obj === 'object' && !(obj instanceof RegExp)) {
 			var objStringArray = [];
 
