@@ -48,9 +48,9 @@ define(['jquery', 'evaluate', 'keymap', 'objToString'], function ($, evaluate, k
 			} else {
 				$(eventObject).trigger('data', [code, result]);
 				result = objToString(result);
-
-				pushToPreviousCmds(code);
 			}
+
+			pushToPreviousCmds(code);
 
 			$('.prompt-completed').clone()
 				.removeClass('prompt-completed')
