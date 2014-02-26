@@ -5,8 +5,11 @@
  */
 
 @bgGray: #efefef;
-@promptColor: blue;
-@errorColor: red;
+@textColor: #222;
+@promptColor: #185694;
+@responseColor: @promptColor;
+@errorColor: #d14;
+@codeColor: #128905;
 
 // http://www.paulirish.com/2012/box-sizing-border-box-ftw/
 * {
@@ -24,11 +27,12 @@ body {
 	flex-direction: column;
 
 	font-family: "Open Sans", sans-serif;
+  color: @textColor;
 }
 
 header {
 	padding: 30px;
-	margin-bottom: 30px;
+	margin-bottom: 40px;
 
 	background-color: @bgGray;
 	text-align: center;
@@ -44,7 +48,7 @@ header {
 	display: flex;
 	flex: 1 1 auto;
 	flex-direction: row;
-	width: calc(~"100% - 40px");
+	width: calc(~"100% - 60px");
 	margin: 0 auto;
 
 	& > div {
@@ -56,12 +60,18 @@ header {
 	}
 
 	.console {
+    padding-right: 20px;
 		font-family: monospace;
 		overflow: auto;
 
 		code {
 			white-space: pre-wrap;
+      color: @responseColor;
 		}
+
+    .prompt + code {
+      color: @codeColor;
+    }
 
 		.prompt {
 			color: @promptColor;
@@ -84,12 +94,13 @@ header {
 		}
 
 		.error {
-			font-weight: bold;
 			color: @errorColor;
 		}
 	}
 
 	.tutorial {
+    padding: 0 50px 0 20px;
+
 		h2 {
 			font-size: 18pt;
 			font-weight: 600;
@@ -97,18 +108,22 @@ header {
 		}
 
 		p, pre {
-			line-height: 1.2;
+			line-height: 1.4;
 			margin-bottom: 10px;
 		}
 
 		li {
-			line-height: 1.2;
+			line-height: 1.4;
 			margin-bottom: 5px;
 		}
 
 		code {
 			font-family: monospace;
 			white-space: pre;
+      border-radius: 3px;
+      background: #eee;
+      padding: 3px;
+      color: @codeColor;
 		}
 
 		em {
