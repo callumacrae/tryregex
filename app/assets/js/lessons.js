@@ -111,9 +111,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 		},
 
 		lesson12: function () {
-			// Much meta
-			var answer = data.lastAnswer.toString().replace(/\s/g, '');
-			return (answer === '/a{0,1}b{1,}c{0,}/');
+			return (data.lastAnswer.toString() === '/a{0,1}b{1,}c{0,}/');
 		},
 
 		lesson13: function (input) {
