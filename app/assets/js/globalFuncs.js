@@ -18,6 +18,23 @@ define(function () {
 		}, 10);
 	};
 
+	window.help = function () {
+		return [
+			'There are a number of useful commands to help you:',
+			'clear() clears the previous commands from the console (or you can' +
+				'press ctrl+l).',
+			'help() displays this help message.',
+			'info() displays information about Try Regex.',
+			'reset() will clear all the previous commands and return you to' +
+				'the beginning of the tutorial'
+		].join('\n\n');
+	};
+
+	window.info = function () {
+		return 'Try Regex is an interactive regular expressions tutorial ' +
+			'written by Callum Macrae. Ask him for help!';
+	};
+
 	window.reset = function () {
 		localStorage.removeItem('currentLesson');
 		localStorage.removeItem('codeSoFar');
