@@ -21,8 +21,8 @@ define(function () {
 	window.help = function () {
 		return [
 			'There are a number of useful commands to help you:',
-			'clear() clears the previous commands from the console (or you can' +
-				'press ctrl+l).',
+			'clear() clears the previous commands from the console (or you ' +
+				'can press ctrl+l).',
 			'help() displays this help message.',
 			'info() displays information about Try Regex.',
 			'reset() will clear all the previous commands and return you to' +
