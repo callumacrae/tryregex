@@ -36,7 +36,7 @@
 				<h2>What are regular expressions?</h2>
 				<p>A regular expression (also known as a regex or a regexp) is a string for describing a search pattern—similar to asterisks for wildcard file name matching, but more powerful (and thus more complicated).</p>
 				<p>We'll start with a very basic example so that you can get the hang of the syntax and regular expressions in JavaScript.</p>
-				<p>The <code>bio</code> variable contains a string which may or may not contain your name. To see if it does, type <code>bio.match(/{{ firstName }}/);</code></p>
+				<p>The <code>bio</code> variable contains a string which may or may not contain your name. To see if it does, type <code>bio.match(/{{ firstEscaped }}/);</code></p>
 			</div>
 
 			<div class="lesson lesson3">
@@ -46,7 +46,7 @@
 				<pre><code>/your expression/</code></pre>
 
 				<p>If you type that into the console, you'll see that the regular expressions is returned.</p>
-				<p>The second is that you can use the <code>.match()</code> method to test an expression on a string. There are a couple other methods you can call: you can use the <code>.exec()</code> method directly on the regex to execute a string on a regex. Type <code>/{{ firstName }}/.exec(bio)</code>.</p>
+				<p>The second is that you can use the <code>.match()</code> method to test an expression on a string. There are a couple other methods you can call: you can use the <code>.exec()</code> method directly on the regex to execute a string on a regex. Type <code>/{{ firstEscaped }}/.exec(bio)</code>.</p>
 			</div>
 
 			<div class="lesson lesson4">
@@ -59,7 +59,7 @@
 			<div class="lesson lesson5">
 				<h2>String replacements</h2>
 				<p>The final method we'll be using is the <code>.replace()</code> method of a string to replace a bit of a string with another string. Type the following to hide your name from the <code>bio</code> var:</p>
-				<pre><code>bio.replace(/{{ firstName }}/, '[redacted]')</code></pre>
+				<pre><code>bio.replace(/{{ firstEscaped }}/, '[redacted]')</code></pre>
 			</div>
 
 			<div class="lesson lesson6">
@@ -169,7 +169,7 @@
 				<h2>Quantifiers</h2>
 				<p>It's almost as if we don't have a group.</p>
 				<p>The main use of non-capturing groups is to apply a quantifier to a number of tokens. The following would match "I ate" and "{{ firstName }} and I ate", but nothing else:</p>
-				<pre><code>/^(?:{{ firstName }} and )?I ate$/</code></pre>
+				<pre><code>/^(?:{{ firstEscaped }} and )?I ate$/</code></pre>
 				<p>Write an expression which matches "ha" repeated two or more times (eg, "haha" or "hahahahaha"), and pass it the <code>answer()</code> function.</p>
 				<p>Hint: your expression shouldn't match "hahah". Use anchors to ensure that it doesn't.</p>
 			</div>

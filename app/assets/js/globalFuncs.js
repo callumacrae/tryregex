@@ -60,6 +60,7 @@ define(function () {
 
 		data.name = name;
 		data.firstName = firstName;
+		data.firstEscaped = firstName.replace(/([$()*+.?\[^|\]])/g, '\\$1');
 
 		return 'Hello, ' + name + '!';
 	};
