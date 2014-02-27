@@ -42,8 +42,15 @@ define(['jquery', 'evaluate', 'keymap', 'objToString'], function ($, evaluate, k
 			// @todo: Remove hack
 			if (code.slice(0, 9) === 'previous(') {
 				pushToPreviousCmds(code);
-//				require('lessons').previousLesson();
 				window.previous();
+				$this.val('');
+				return;
+			}
+
+			// @todo: Remove hack
+			if (code.slice(0, 11) === 'showAnswer(') {
+				pushToPreviousCmds(code);
+				window.showAnswer();
 				$this.val('');
 				return;
 			}

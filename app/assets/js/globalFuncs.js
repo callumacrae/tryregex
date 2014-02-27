@@ -79,6 +79,10 @@ define(['jquery', 'require'], function ($, require) {
 		var answer = require('lessons').getAnswer(),
 			$input = $('.regex-input');
 
+		if (answer === null) {
+			return 'undefined';
+		}
+
 		if (!$input.val()) {
 			$input.val(answer);
 		} else if ($input.val().slice(0, 11) === 'showAnswer(') {

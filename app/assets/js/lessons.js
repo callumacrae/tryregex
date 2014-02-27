@@ -33,18 +33,22 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return !!data.name;
 		},
 
+		lesson2Solution: 'bio.match(/{{ firstEscaped }}/);',
 		lesson2: function (input, output) {
 			return ($.isArray(output) && output[0] === data.firstName);
 		},
 
+		lesson3Solution: '/{{ firstEscaped }}/.exec(bio)',
 		lesson3: function (input, output) {
 			return ($.isArray(output) && output[0] === data.firstName);
 		},
 
+		lesson4Solution: '/{{ firstEscaped }}/.test(bio)',
 		lesson4: function (input, output) {
 			return (typeof output === 'boolean');
 		},
 
+		lesson5Solution: 'bio.replace(/{{ firstEscaped }}/, \'[redacted]\')',
 		lesson5: function (input, output) {
 			if (!contains(input, 'replace')) {
 				return false;
@@ -56,6 +60,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return (match !== null && match[1] !== data.firstName);
 		},
 
+		lesson6Solution: 'num.match(/3\\.5/)',
 		lesson6: function (input, output) {
 			if (!contains(input, 'num')) {
 				return false;
@@ -70,6 +75,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return false;
 		},
 
+		lesson7Solution: 'num.match(/3.5/)',
 		lesson7: function (input, output) {
 			if (!contains(input, '3.5')) {
 				return false;
@@ -79,6 +85,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				($.isArray(output) && output[0] === '345'));
 		},
 
+		lesson8Solution: 'answer(/front-?end/)',
 		lesson8: function (input) {
 			if (!contains(input, '?')) {
 				return false;
@@ -88,6 +95,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return (expr.test('frontend') && expr.test('front-end'));
 		},
 
+		lesson9Solution: '/\\(.+\\)/.exec(shortStory)',
 		lesson9: function (input, output) {
 			if (contains(input, 'regex') || contains(input, '*')) {
 				return false;
@@ -96,6 +104,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return (output && output[0] === '(also regex or regexp)');
 		},
 
+		lesson10Solution: '/\\(.*\\)/.exec(shortStory)',
 		lesson10: function (input, output) {
 			if (contains(input, 'regex') || contains(input, '+')) {
 				return false;
@@ -104,6 +113,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return (output && output[0] === '(also regex or regexp)');
 		},
 
+		lesson11Solution: 'bracketNumbers.match(/\\(.{5,8}\\)/)',
 		lesson11: function (input, output) {
 			if (contains(input, '34')) {
 				return false;
@@ -112,14 +122,17 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return (output && output[0] === '(123456)');
 		},
 
+		lesson12Solution: 'answer(/a{0,1}b{1,}c{0,}/)',
 		lesson12: function () {
 			return (data.lastAnswer.toString() === '/a{0,1}b{1,}c{0,}/');
 		},
 
+		lesson13Solution: '/CAT/i.exec(\'Category\')',
 		lesson13: function (input) {
 			return contains(input.toLowerCase(), '/cat/i');
 		},
 
+		lesson14Solution: 'shortStory.replace(/a/g, \'e\')',
 		lesson14: function (input, output) {
 			if (!contains(input, 'replace')) {
 				return false;
@@ -129,6 +142,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return output.slice(1) === expected.slice(1); // Ignore first char
 		},
 
+		lesson15Solution: '/[a-z\\-]{5,12}/i.test(username)',
 		lesson15: function (input, output) {
 			if (output !== true) {
 				return false;
@@ -166,6 +180,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return true;
 		},
 
+		lesson16Solution: '/[^ ]{5,12}/i.test(username)',
 		lesson16: function (input, output) {
 			if (output !== true) {
 				return false;
@@ -198,7 +213,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return true;
 		},
 
-		// /\d+\s\w+/.exec(charTypeTest)
+		lesson17Solution: '/\\w+\\s\\d+/.exec(charTypeTest)',
 		lesson17: function (input) {
 			if (!contains(input, ['\\w', '\\d'])) {
 				return false;
@@ -210,6 +225,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return $.isArray(realOut) && realOut[0] === window.charTypeTest;
 		},
 
+		lesson18Solution: '/^https?:\\/\\/[^ ]+$/.test(possibleUrl)',
 		lesson18: function (input, output) {
 			if (contains(input, 'test') && output !== true) {
 				return false;
@@ -230,10 +246,12 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return $.isArray(output) && output[0] === window.possibleUrl;
 		},
 
+		lesson19Solution: '/\\((.{5,8})\\)/.exec(shorterStory)',
 		lesson19: function (input, output) {
 			return ($.isArray(output) && output[1] === '123456');
 		},
 
+		lesson20Solution: '/\\((?:.{5,8})\\)/.exec(shorterStory)',
 		lesson20: function (input, output) {
 			if (!contains(input, '(?:')) {
 				return false;
@@ -242,6 +260,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return ($.isArray(output) && output.length === 1);
 		},
 
+		lesson21Solution: 'answer(/^(?:ha){2,}$/)',
 		lesson21: function () {
 			var expr = data.lastAnswer;
 
@@ -250,6 +269,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				!expr.test('hahahah'));
 		},
 
+		lesson22Solution: '/The (dog|cat|rabbit) ate/.exec(rabbit)',
 		lesson22: function (input, output) {
 			if (contains(input, ['dog', 'cat', 'rabbit'])) {
 				return output === true ||
@@ -259,6 +279,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return false;
 		},
 
+		lesson23Solution: 'answer(/(\\S+) \\1/)',
 		lesson23: function () {
 			var regex = data.lastAnswer;
 
@@ -275,6 +296,8 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				}, true);
 		},
 
+		lesson24Solution: 'new RegExp(username + \'=(\\\\w+);\').exec(userData)',
+		lesson24Hint: 'As it is a string, you need to escape your backwards slash.',
 		lesson24: function (input, output) {
 			if (!contains(input, 'username') || contains(input, 'Bob')) {
 				return false;
@@ -283,6 +306,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return ($.isArray(output) && output[1] === 'happy');
 		},
 
+		lesson25Solution: 'boldText.replace(/\\*\\*([^*]+)\\*\\*/, \'<strong>$1</strong>\')',
 		lesson25: function (input, output) {
 			if (!contains(input, 'replace') || contains(input, '**')) {
 				return false;
@@ -291,6 +315,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return output === '<strong>bold text!</strong>';
 		},
 
+		lesson26Solution: '\'"Hi", "Hello"\'.match(/".+?"/)',
 		lesson26: function (input, output) {
 			if (!contains(input, '.+?')) {
 				return false;
@@ -299,6 +324,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return $.isArray(output) && output[0] === '"Hi"';
 		},
 
+		lesson27Solution: '/\\d\\+\\d(?==\\d)/.exec(partialSums)',
 		lesson27: function (input, output) {
 			if (!contains(input, '(?=') || /\d/.test(input)) {
 				return false;
@@ -307,6 +333,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 			return $.isArray(output) && output[0] === '6+3';
 		},
 
+		lesson28Solution: '/\\d\\+\\d(?==)(?!\\d)/.exec(partialSums)',
 		lesson28: function (input, output) {
 			if (!contains(input, ['(?=', '(?!']) || /\d/.test(input)) {
 				return false;
@@ -318,7 +345,15 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 	// Give the globalFuncs access to the current answer
 	exports.getAnswer = function () {
-		return lessonCompleted['lesson' + currentLesson + 'Solution'];
+		var solution = lessonCompleted['lesson' + currentLesson + 'Solution'];
+
+		if (!solution) {
+			return null;
+		}
+
+		return solution.replace(/{{ (\S+) }}/, function (text, property) {
+			return data[property] ? data[property] : text;
+		});
 	};
 
 	exports.previousLesson = function () {
