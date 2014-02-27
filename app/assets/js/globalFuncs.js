@@ -1,4 +1,4 @@
-define(function () {
+define(['jquery', 'require'], function ($, require) {
 	'use strict';
 
 	var data = {};
@@ -21,6 +21,11 @@ define(function () {
 	window.help = function () {
 		return [
 			'There are a number of useful commands to help you:',
+			'Lesson commands:',
+			'previous() will go back to the previous lesson.',
+			'showAnswer() will give you the answer to the current lesson.' +
+				'Try to avoid using this!',
+			'Console commands:',
 			'clear() clears the previous commands from the console (or you ' +
 				'can press ctrl+l).',
 			'help() displays this help message.',
@@ -33,6 +38,10 @@ define(function () {
 	window.info = function () {
 		return 'Try Regex is an interactive regular expressions tutorial ' +
 			'written by Callum Macrae. Ask him for help!';
+	};
+
+	window.previous = function () {
+		require('lessons').previousLesson();
 	};
 
 	window.reset = function () {
@@ -63,6 +72,23 @@ define(function () {
 		data.firstEscaped = firstName.replace(/([$()*+.?\[^|\]])/g, '\\$1');
 
 		return 'Hello, ' + name + '!';
+	};
+
+	window.showAnswer = function () {
+		// Both modules depend on each other; cannot require as dep
+		var answer = require('lessons').getAnswer(),
+			$input = $('.regex-input');
+
+		if (!$input.val()) {
+			$input.val(answer);
+		} else if ($input.val().slice(0, 11) === 'showAnswer(') {
+			// Wait until next cycle or it will be cleared
+			setTimeout(function () {
+				$input.val(answer);
+			});
+		}
+
+		return answer;
 	};
 
 	// Global vars in order of appearance

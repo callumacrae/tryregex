@@ -1,7 +1,8 @@
 define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConsole, evaluate, data) {
 	'use strict';
 
-	var currentLesson = localStorage.getItem('currentLesson') || 1;
+	var exports = {},
+		currentLesson = localStorage.getItem('currentLesson') || 1;
 
 	if (currentLesson !== 1) {
 		$('.lesson1').hide();
@@ -27,6 +28,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 	});
 
 	var lessonCompleted = {
+		lesson1Solution: 'setName(\'Your name\')',
 		lesson1: function () {
 			return !!data.name;
 		},
@@ -314,6 +316,23 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 		}
 	};
 
+	// Give the globalFuncs access to the current answer
+	exports.getAnswer = function () {
+		return lessonCompleted['lesson' + currentLesson + 'Solution'];
+	};
+
+	exports.previousLesson = function () {
+		if (currentLesson === 1) {
+			return;
+		}
+
+		currentLesson--;
+		localStorage.setItem('currentLesson', currentLesson);
+
+		$('.lesson').hide();
+		$('.lesson' + currentLesson).show();
+	};
+
 	function startLesson(num) {
 		$('.lesson' + num).show()
 			.find('p, h1, pre').each(function () {
@@ -358,4 +377,6 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 
 		return new RegExp(body, flags);
 	}
+
+	return exports;
 });
