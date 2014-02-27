@@ -26,7 +26,7 @@ define(function () {
 			'help() displays this help message.',
 			'info() displays information about Try Regex.',
 			'reset() will clear all the previous commands and return you to' +
-				'the beginning of the tutorial'
+				' the beginning of the tutorial'
 		].join('\n\n');
 	};
 
