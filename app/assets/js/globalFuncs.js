@@ -3,10 +3,34 @@ define(function () {
 
 	var data = {};
 
+	// Functions in alphabetical order
 	// Functions are declared globally so that eval can access them.
+
+	window.answer = function (expression) {
+		data.lastAnswer = expression;
+
+		return 'Answer received';
+	};
+
+	window.clear = function () {
+		setTimeout(function () {
+			$('.console li:not(.input-container)').remove();
+		}, 10);
+	};
+
+	window.reset = function () {
+		localStorage.removeItem('currentLesson');
+		localStorage.removeItem('codeSoFar');
+
+		setTimeout(location.reload.bind(location), 100);
+
+		return 'Resetting…';
+	};
+
 	window.setName = function (name) {
 		if (data.name) {
-			return 'You have already set your name! Type reset() to start again, if you want.';
+			return 'You have already set your name! ' +
+				'Type reset() to start again, if you want.';
 		}
 
 		var firstName = name.split(' ')[0];
@@ -23,28 +47,9 @@ define(function () {
 		return 'Hello, ' + name + '!';
 	};
 
-	window.reset = function () {
-		localStorage.removeItem('currentLesson');
-		localStorage.removeItem('codeSoFar');
-
-		setTimeout(location.reload.bind(location), 100);
-
-		return 'Resetting…';
-	};
-
-	window.clear = function () {
-		setTimeout(function () {
-			$('.console li:not(.input-container)').remove();
-		}, 10);
-	};
+	// Global vars in order of appearance
 
 	window.num = '123456';
-
-	window.answer = function (expression) {
-		data.lastAnswer = expression;
-
-		return 'Answer received';
-	};
 
 	window.shortStory = 'A regular expression (also regex or regexp) is a string.';
 
