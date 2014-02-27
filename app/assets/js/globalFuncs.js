@@ -48,7 +48,8 @@ define(function () {
 
 	window.shortStory = 'A regular expression (also regex or regexp) is a string.';
 
-	window.shorterStory = '(123) (123456) (123456789)';
+	window.bracketNumbers = '(123) (123456) (123456789)';
+	window.shorterStory = window.bracketNumbers;
 
 	window.username = 'BobbyTables';
 
