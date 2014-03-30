@@ -296,7 +296,7 @@ define(['jquery', 'console', 'evaluate', 'globalFuncs'], function ($, regexConso
 				}, true);
 		},
 
-		lesson24Solution: 'new RegExp(username + \'=(\\\\w+);\').exec(userData)',
+		lesson24Solution: 'new RegExp(username + \'=(\\\\w+);?\').exec(userData)',
 		lesson24Hint: 'As it is a string, you need to escape your backwards slash.',
 		lesson24: function (input, output) {
 			if (!contains(input, 'username') || contains(input, 'Bob')) {
