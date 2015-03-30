@@ -1,39 +1,32 @@
 'use strict';
 
-var browserSync = require('browser-sync'),
-	es = require('event-stream'),
-	gulp = require('gulp'),
-	stylish = require('jshint-stylish'),
-	plugins = require('gulp-load-plugins')();
+var browserSync = require('browser-sync');
+var gulp = require('gulp');
+var through = require('through2');
+var plugins = require('gulp-load-plugins')();
 
 var config = {
+	buildDir: 'app/assets/build',
 	minify: false
 };
 
-gulp.task('build', ['less']);
-
 gulp.task('less', function () {
-	var lessStream = plugins.less({
-			compress: true
-		});
-
-	lessStream.on('error', function (err) {
-		plugins.util.log(plugins.util.colors.red.bold('Parse error:'), err.message);
-	});
-
-	var stream = gulp.src('app/assets/less/style.less');
-
-	stream = stream.pipe(lessStream)
-		.pipe(plugins.autoprefixer());
-
-	if (config.minify) {
-		stream = stream.pipe(plugins.minifyCss());
-	}
-
-	stream.pipe(gulp.dest('app/assets/build'));
+	return gulp.src('app/assets/less/style.less')
+		.pipe(plugins.less({ compress: true }))
+		.on('error', function (err) {
+			var parseError = plugins.util.colors.red.bold('Parse error:');
+			plugins.util.log(parseError, err.message);
+		})
+		.pipe(plugins.autoprefixer())
+		.pipe(config.minify ? plugins.minifyCss() : through.obj())
+		.pipe(gulp.dest(config.buildDir));
 });
 
-gulp.task('browser-sync', function () {
+gulp.task('build', ['less']);
+
+gulp.task('default', ['build'], function () {
+	gulp.watch('app/assets/less/**/*.less', ['less']);
+
 	browserSync.init([
 		'app/assets/build/style.css',
 		'app/assets/css/**/*.css',
@@ -52,51 +45,4 @@ gulp.task('browser-sync', function () {
 			forms: true
 		}
 	});
-});
-
-gulp.task('jshint', function (done) {
-	var failed = false;
-
-	gulp.src(['app/assets/js/*.js', 'gulpfile.js'])
-		.pipe(plugins.jshint('.jshintrc'))
-		.pipe(plugins.jshint.reporter(stylish))
-		.pipe(es.map(function (file, cb) {
-			cb(null, file);
-			if (!failed) {
-				failed = !file.jshint.success;
-			}
-		}))
-		.on('end', function () {
-			if (failed) {
-				done(new Error('Failed JSHint'));
-			} else {
-				done();
-			}
-		});
-});
-
-gulp.task('htmllint', function (done) {
-	var failed = false;
-
-	gulp.src(['app/**/*.html', '!app/assets/js/**/*.html'])
-		.pipe(plugins.w3cjs())
-		.pipe(es.map(function (file, cb) {
-			cb(null, file);
-			if (!failed) {
-				failed = !file.w3cjs.success;
-			}
-		}))
-		.on('end', function () {
-			if (failed) {
-				done(new Error('Failed HTMLLint'));
-			} else {
-				done();
-			}
-		});
-});
-
-gulp.task('lint', ['jshint', /*'lesslint',*/ 'htmllint']);
-
-gulp.task('default', ['lint', 'build', 'browser-sync'], function () {
-	gulp.watch('app/assets/less/**/*.less', ['less']);
 });
