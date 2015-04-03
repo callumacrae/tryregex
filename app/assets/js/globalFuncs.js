@@ -23,7 +23,7 @@ define(['jquery', 'require'], function ($, require) {
 			'There are a number of useful commands to help you:',
 			'Lesson commands:',
 			'previous() will go back to the previous lesson.',
-			'showAnswer() will give you the answer to the current lesson.' +
+			'showAnswer() will give you the answer to the current lesson. ' +
 				'Try to avoid using this!',
 			'Console commands:',
 			'clear() clears the previous commands from the console (or you ' +
